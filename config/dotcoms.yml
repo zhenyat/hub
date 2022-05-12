@@ -1,0 +1,5 @@
+binance:
+  demo:
+    methods:  ticker tickers time
+  trade:
+    methods:  balance candles order
