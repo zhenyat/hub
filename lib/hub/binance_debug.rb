@@ -13,7 +13,11 @@ module Hub
   # GET https://testnet.binance.vision/api/v3/ticker/24hr?symbol=BTCUSDT
   options = {symbol: 'BTCUSDT'}
   api = PublicApi.new(dotcom: dotcom, method: 'ticker', extension: '24hr', options: options)
-  puts "\nTicker:", Tools.blue(api.request)
+  puts "\nTicker: BTCUSDT", Tools.blue(api.request)
+
+  options = {}
+  api = PublicApi.new(dotcom: dotcom, method: 'ticker', extension: '24hr', options: options)
+  puts "\nTicker: All Pairs", Tools.blue(api.request)
 
   # pp api
   # pp dotcom.name
