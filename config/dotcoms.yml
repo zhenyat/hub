@@ -3,3 +3,9 @@ binance:
     methods:  ticker tickers time
   trade:
     methods:  balance candles order
+
+cexio:
+  demo:
+    methods:  currency_limits last_price last_prices ohlcv order_book ticker tickers trade_history
+  trade:
+    methods:  balance candles last_price last_prices order

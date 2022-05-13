@@ -2,14 +2,16 @@
 
 module Hub
   # puts Tools.green Time.at(Tools.timestamp.to_i / 1000)
-  dotcom = Dotcom.new name: 'binance'
+  dotcom = Dotcom.new name: 'binance', api_mode: 'demo'
   # pp dotcom.endpoint
 
+  ###  Method: Time  ###
   # GET https://testnet.binance.vision/api/v3/time
   api = PublicApi.new(dotcom: dotcom, method: 'time')
   puts "\nServer Time:", Tools.blue(Time.at(api.request['serverTime']/1000))
   # Tools.blue "Server time: #{Time.at(api.request['serverTime'].to_i/1000)}"     
 
+  ###  Method: Ticker  ###
   # GET https://testnet.binance.vision/api/v3/ticker/24hr?symbol=BTCUSDT
   options = {symbol: 'BTCUSDT'}
   api = PublicApi.new(dotcom: dotcom, method: 'ticker', extension: '24hr', options: options)
@@ -19,6 +21,12 @@ module Hub
   api = PublicApi.new(dotcom: dotcom, method: 'ticker', extension: '24hr', options: options)
   puts "\nTicker: All Pairs", Tools.blue(api.request)
 
+  # GET https://testnet.binance.vision/api/v3/ticker/price?symbol=BTCUSDT
+  #     {"symbol":"BTCUSDT","price":"28690.58000000"}
+  options = {symbol: 'BTCUSDT'}
+  api = PublicApi.new(dotcom: dotcom, method: 'ticker', extension: 'price', options: options)
+  puts "\nTicker: BTCUSDT Price", Tools.blue(api.request)
+  
   # pp api
   # pp dotcom.name
   # pp api.dotcom.name

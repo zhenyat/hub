@@ -50,7 +50,7 @@ module Hub
       url = @dotcom.endpoint + "/#{@method}"
       url << "/#{@extension}" unless @extension.nil?
       uri = URI url
-      uri.query = URI.encode_www_form(options) unless options.nil?
+      uri.query = URI.encode_www_form(options) unless options.empty?
       uri
     end
   end
