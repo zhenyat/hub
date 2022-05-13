@@ -4,6 +4,7 @@ module Hub
   class  PublicApi
     def initialize dotcom:, method:, extension: nil, options: {}
       @dotcom     = dotcom
+      # @rest       = rest == 'POST' ? 'POST' : 'GET'
       @method     = method
       @extension  = extension
       @options    = options
@@ -31,7 +32,10 @@ module Hub
     def options
       @options
     end
+  end
 
+  class PublicApiGet < PublicApi
+    # HTTP request
     def request
       begin
         response = Net::HTTP.get(self.uri)
@@ -52,6 +56,25 @@ module Hub
       uri = URI url
       uri.query = URI.encode_www_form(options) unless options.empty?
       uri
+    end
+  end
+
+  class PublicApiPost < PublicApi
+    def request
+      begin
+        Net::HTTP.start(self.uri.host, self.uri.port, :use_ssl => true) do |http|
+          response = http.post(self.uri.path, URI.encode_www_form(@options)).body
+          JSON.parse(response)
+        end
+      rescue StandardError => e
+        {:success => 0, :error => e}
+      end
+    end
+
+    def uri
+      url = @dotcom.endpoint + "/#{@method}"
+      url << "/#{@extension}" unless @extension.nil?
+      URI url
     end
   end
 end

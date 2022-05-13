@@ -12,59 +12,74 @@ module Hub
 
   ### Method: currency_limits ###
   # GET https://cex.io/api/currency_limits
-  api = PublicApi.new dotcom: dotcom, method: 'currency_limits'
-  puts "\nCurrency Limits", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'currency_limits'
+  puts "\n#{dotcom.name.capitalize} -- Currency Limits", Tools.blue(api.request)
 
   ###  Method: Ticker  ###
   # GET https://cex.io/api/ticker/BTC/USD
   extension = 'BTC/USD'
-  api = PublicApi.new dotcom: dotcom, method: 'ticker', extension: extension
-  puts "\nTicker: BTCUSD", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'ticker', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Ticker: BTCUSD", Tools.blue(api.request)
 
   ###  Method: Tickers  ###
   # GET https://cex.io/api/tickers/{marketSymbol1}/{marketSymbol2}/.../{marketSymbolN}
   extension = 'BTC/ETH/BCH'
-  api = PublicApi.new dotcom: dotcom, method: 'tickers', extension: extension
-  puts "\nTickers: BTC/ETH/BCH", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'tickers', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Tickers: BTC/ETH/BCH", Tools.blue(api.request)
 
   ###  Method: Last Price  ###
   # GET https://cex.io/api/last_price/{symbol1}/{symbol2}
   extension = 'ETH/USD'
-  api = PublicApi.new dotcom: dotcom, method: 'last_price', extension: extension
-  puts "\nLast price: ETH/USD", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'last_price', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Last price: ETH/USD", Tools.blue(api.request)
 
   ###  Method: Last Prices  ###
   # GET https://cex.io/api/last_prices/{marketSymbol1}/{marketSymbol2}/.../{marketSymbolN}
   extension = 'BTC/ETH/BCH'
-  api = PublicApi.new dotcom: dotcom, method: 'last_prices', extension: extension
-  puts "\nLast prices: BTC/ETH/BCH", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'last_prices', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Last prices: BTC/ETH/BCH", Tools.blue(api.request)
 
   ###  Method: Historical 1m OHLCV Chart  ###
   # GET https://cex.io/api/ohlcv/hd/{date}/{symbol1}/{symbol2}
   extension = 'hd/20220510/ETH/USD'
-  api = PublicApi.new dotcom: dotcom, method: 'ohlcv', extension: extension
-  puts "\nOHLCV 1 m Chart: ETH/USD", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'ohlcv', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- OHLCV 1 m Chart: ETH/USD", Tools.blue(api.request)
 
   ###  Method: Order Book  ###
   # GET https://cex.io/api/order_book/{symbol1}/{symbol2}/
   extension = 'BTC/USD/'
-  api = PublicApi.new dotcom: dotcom, method: 'order_book', extension: extension
-  puts "\nOrde Book: BTCUSD", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'order_book', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Orde Book: BTCUSD", Tools.blue(api.request)
 
   # GET https://cex.io/api/order_book/{symbol1}/{symbol2}?depth=N  (n=1 - default: ALL)
   options = {depth: 5}  # Slash at the end !!!
-  api = PublicApi.new dotcom: dotcom, method: 'order_book', extension: extension, options: options
-  puts "\nOrder Book: BTCUSD, depth = 5", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'order_book', extension: extension, options: options
+  puts "\n#{dotcom.name.capitalize} -- Order Book: BTCUSD, depth = 5", Tools.blue(api.request)
 
   ###  Method: Trade History  ###
   # GET https://cex.io/api/trade_history/{symbol1}/{symbol2}/
   extension = 'ETH/USD/'
-  api = PublicApi.new dotcom: dotcom, method: 'trade_history', extension: extension
-  puts "\nTrade_history: ETHUSD", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'trade_history', extension: extension
+  puts "\n#{dotcom.name.capitalize} -- Trade History: ETHUSD", Tools.blue(api.request)
 
   # GET https://cex.io/api/trade_history/{symbol1}/{symbol2}?since={tid}/
   extension = 'ETH/USD/'      # Slash at the end !!!
   options = {since: 6282000}
-  api = PublicApi.new dotcom: dotcom, method: 'trade_history', extension: extension, options: options
-  puts "\nTrade_history: ETHUSD with Trade ID > 6282000", Tools.blue(api.request)
+  api = PublicApiGet.new dotcom: dotcom, method: 'trade_history', extension: extension, options: options
+  puts "\n#{dotcom.name.capitalize} -- Trade History: ETHUSD with Trade ID > 6282000", Tools.blue(api.request)
+
+  ###  Method: Conevrt  ###
+  # POST https://cex.io/api/convert/{symbol1}/{symbol2}  body: {amnt: 3.0}
+  extension = 'ETH/USD'
+  options = {amnt: 3.0}
+  api = PublicApiPost.new dotcom: dotcom, method: 'convert', extension: extension, options: options
+  puts "\n#{dotcom.name.capitalize} -- Convert: ETHUSD", Tools.blue(api.request)
+
+  ###  Method: Conevrt  ###
+  # POST https://cex.io/api/price_stats/{symbol1}/{symbol2} 
+  #      body: {"lastHours": 24, "maxRespArrSize": 100}
+  extension = 'ETH/USD'
+  options = {"lastHours": 24, "maxRespArrSize": 100}
+  api = PublicApiPost.new dotcom: dotcom, method: 'price_stats', extension: extension, options: options
+  puts "\n#{dotcom.name.capitalize} -- Chart: ETHUSD", Tools.blue(api.request)
 end

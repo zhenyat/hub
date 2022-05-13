@@ -11,8 +11,8 @@ require_relative "hub/version"
 require_relative "hub/dotcom"
 require_relative "hub/tools"
 require_relative "hub/public_api"
-# require_relative "hub/binance_debug"
-require_relative "hub/cexio_debug"
+require_relative "hub/binance_debug"
+# require_relative "hub/cexio_debug"
 
 module Hub
   class Error < StandardError; end
