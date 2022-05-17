@@ -9,8 +9,8 @@
 module Hub
   # puts Tools.green Time.at(Tools.timestamp.to_i / 1000)
   dotcom = Dotcom.new name: 'binance', api_mode: 'demo'
-  # pp dotcom.endpoint
-if false
+  # pp dotcom
+
   ###  Method: Ping  ###
   # Test connectivity to the Rest API 
   # GET https://testnet.binance.vision/api/v3/ping  => {}
@@ -93,13 +93,4 @@ if false
   options = {symbol: 'BTCUSDT'}
   api = PublicApiGet.new(dotcom: dotcom, method: 'avgPrice', options: options)
   puts "\n#{dotcom.name.capitalize} -- avgPrice: BTCUSDT", Tools.blue(api.request)
-end
-
-  
-  # pp api
-  # pp dotcom.name
-  # pp api.dotcom.name
-  # pp api.parameters
-  # pp api.methods_list
-  # pp api.method_available? 'ticker' # 'timer' => raises error
 end

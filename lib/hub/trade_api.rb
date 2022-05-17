@@ -1,12 +1,13 @@
-# frozen_string_literal: true
-
 module Hub
-  class  PublicApi
-    def initialize dotcom:, method:, extension: nil, options: {}
+  class  TradeApi
+    attr_accessor :dotcom, :method, :user_id, :extension, :options
+    
+    def initialize dotcom:, method:, user_id: nil, extension: nil, options: {}
       @dotcom     = dotcom
       @method     = method
       @extension  = extension
       @options    = options
+      @user_id    = user_id
       raise "\nError: unavailbale method '#{@method}' for #{@dotcom.name} - pls update the YAML file" unless method_available? @method
     end
 
@@ -28,41 +29,23 @@ module Hub
       data[@dotcom.name][@dotcom.api_mode]['methods'].split(' ')
     end
 
+
     def options
       @options
     end
+
   end
 
-  class PublicApiGet < PublicApi
-    # HTTP request
+  class TradeApiPost < TradeApi
     def request
       begin
-        response = Net::HTTP.get(self.uri)
-      rescue StandardError => e
-        {:success => 0, :error => e}
-      else
-        begin 
-          JSON.parse response
-        rescue
-          Tools.red "HTTP.get(#{self.uri}) failed" 
-        end
-      end
-    end
-
-    def uri
-      url = @dotcom.endpoint + "/#{@method}"
-      url << "/#{@extension}" unless @extension.nil?
-      uri = URI url
-      uri.query = URI.encode_www_form(options) unless options.empty?
-      uri
-    end
-  end
-
-  class PublicApiPost < PublicApi
-    def request
-      begin
+        options = {
+          "key": @api_key,
+          "signature": dotcom.signature,
+          "nonce": Tools.nonce
+        }
         Net::HTTP.start(self.uri.host, self.uri.port, :use_ssl => true) do |http|
-          response = http.post(self.uri.path, URI.encode_www_form(@options)).body
+          response = http.post(self.uri.path, URI.encode_www_form(options)).body
           JSON.parse(response)
         end
       rescue StandardError => e

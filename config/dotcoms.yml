@@ -6,6 +6,6 @@ binance:
 
 cexio:
   demo:
-    methods:  convert currency_limits last_price last_prices ohlcv order_book price_stats ticker tickers trade_history
+    methods:  balance convert currency_limits last_price last_prices ohlcv order_book price_stats ticker tickers trade_history
   trade:
-    methods:  balance candles last_price last_prices order
+    methods:  currency_limits balance candles last_price last_prices order

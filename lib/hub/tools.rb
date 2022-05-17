@@ -1,10 +1,14 @@
 # frozen_string_literal: true
-require "openssl"
-require "base64"
+# require "openssl"
+# require "base64"
 
 module Hub
   class Tools
     class << self
+      def nonce
+        Time.now.utc.to_i + 11
+      end
+
       def timestamp
         Time.now.utc.strftime("%s%3N")
       end

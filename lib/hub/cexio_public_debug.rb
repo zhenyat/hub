@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 ###############################################################################
-#   Testing of CEX.IO REST Public API
+#   Testing of CEX.IO REST Public API (GET requests)
 #   https://cex.io/rest-api
 #
 #   13.05.2022  Created
@@ -68,14 +68,14 @@ module Hub
   api = PublicApiGet.new dotcom: dotcom, method: 'trade_history', extension: extension, options: options
   puts "\n#{dotcom.name.capitalize} -- Trade History: ETHUSD with Trade ID > 6282000", Tools.blue(api.request)
 
-  ###  Method: Conevrt  ###
+  ###  Method: Convert  ###
   # POST https://cex.io/api/convert/{symbol1}/{symbol2}  body: {amnt: 3.0}
   extension = 'ETH/USD'
   options = {amnt: 3.0}
   api = PublicApiPost.new dotcom: dotcom, method: 'convert', extension: extension, options: options
   puts "\n#{dotcom.name.capitalize} -- Convert: ETHUSD", Tools.blue(api.request)
 
-  ###  Method: Conevrt  ###
+  ###  Method: price_stats  ###
   # POST https://cex.io/api/price_stats/{symbol1}/{symbol2} 
   #      body: {"lastHours": 24, "maxRespArrSize": 100}
   extension = 'ETH/USD'
