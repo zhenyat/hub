@@ -8,7 +8,7 @@
 ###############################################################################
 module Hub
   # puts Tools.green Time.at(Tools.timestamp.to_i / 1000)
-  dotcom = Dotcom.new name: 'binance', api_mode: 'demo'
+  dotcom = Dotcom.new name: 'binance', api_mode: 'public'
   # pp dotcom
 
   ###  Method: Ping  ###

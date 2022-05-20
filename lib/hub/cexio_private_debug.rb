@@ -7,14 +7,15 @@
 #   16.05.2022  Created
 ###############################################################################
 module Hub
-  dotcom = Dotcom.new name: 'cexio', api_mode: 'demo'
-  pp dotcom
+  # dotcom = Dotcom.new name: 'cexio', api_mode: 'private'
+  # pp dotcom
+
   # puts "===== #{dotcom.signature}"
   # exit
 
   ### Trade (Private) method: balance ###
   #   POST https://cex.io/api/balance/
-  api = TradeApiPost.new dotcom: dotcom, method: 'balance'
-  puts "\n#{dotcom.name.capitalize} -- Account balance", Tools.blue(api.request)
+  # api = TradeApiPost.new dotcom: dotcom, method: 'balance'
+  # puts "\n#{dotcom.name.capitalize} -- Account balance", Tools.blue(api.request)
 
 end

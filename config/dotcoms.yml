@@ -1,11 +1,11 @@
 binance:
-  demo:
+  public:
     methods:  aggTrades avgPrice depth exchangeInfo historicalTrades klines ping ticker tickers time trades
   trade:
     methods:  balance candles order
 
 cexio:
-  demo:
+  public:
     methods:  balance convert currency_limits last_price last_prices ohlcv order_book price_stats ticker tickers trade_history
   trade:
     methods:  currency_limits balance candles last_price last_prices order

@@ -14,11 +14,11 @@ require_relative "hub/public_api"
 require_relative "hub/trade_api"
 # require_relative "hub/binance_public_debug"
 # require_relative "hub/cexio_public_debug"
-require_relative "hub/cexio_trade_debug"
+# require_relative "hub/cexio_private_debug"
 
 module Hub
   class Error < StandardError; end
 
-  # dotcom = Dotcom.new name: 'kraken', api_mode: 'demo'
+  # dotcom = Dotcom.new name: 'kraken', api_mode: 'public'
   # pp dotcom
 end

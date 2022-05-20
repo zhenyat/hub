@@ -7,7 +7,7 @@
 ###############################################################################
 module Hub
   # puts Tools.green Time.at(Tools.timestamp.to_i / 1000)
-  dotcom = Dotcom.new name: 'cexio', api_mode: 'demo'
+  dotcom = Dotcom.new name: 'cexio', api_mode: 'public'
   # pp dotcom
 
   ### Method: currency_limits ###
